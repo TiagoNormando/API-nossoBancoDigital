@@ -1,0 +1,13 @@
+version: "3"
+
+
+services:
+  postgres:
+    image: postgres:9.4
+    container_name: postgresNormando
+    ports:
+      - 5440:5432
+    environment:
+      - POSTGRES_DB=NBancoDig
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=postgres
