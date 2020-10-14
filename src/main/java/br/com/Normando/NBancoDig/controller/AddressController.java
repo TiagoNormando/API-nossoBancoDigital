@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequestMapping(value = "/addresses")
 @RestController
@@ -27,6 +29,11 @@ public class AddressController {
     @GetMapping(value = "/{id}")
     public AddressDto findById(@PathVariable Integer id) {
         return addressMapper.convertToDto(addressService.findById(id));
+    }
+
+    @GetMapping(value = "/client/{clientId}")
+    public List<AddressDto> findByClient(@PathVariable Integer clientId) {
+        return addressMapper.convertToListDto(addressService.findByClient(clientId));
     }
 
     @Transactional

@@ -6,6 +6,8 @@ import br.com.Normando.NBancoDig.dto.AddressDto;
 import br.com.Normando.NBancoDig.model.AddressModel;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 
 public class AddressMapper {
 
@@ -33,6 +35,10 @@ public class AddressMapper {
         return addressMd;
     }
 
+    public List<AddressDto> convertToListDto(List<AddressModel> addresses){
+        return (List<AddressDto>) addresses.stream().map(this::convertToDto);
+    }
+    //
     public boolean verifyCep(String cep){
         String padrao = "^\\d{5}[-]\\d{3}$";
 

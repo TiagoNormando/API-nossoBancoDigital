@@ -5,6 +5,8 @@ import br.com.Normando.NBancoDig.model.AddressModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 
 public interface AddressService {
     //
@@ -15,6 +17,8 @@ public interface AddressService {
     AddressModel save(AddressModel addressMd);
     //
     AddressModel save(Integer id, AddressModel addressMd);
+    //
+   List<AddressModel> findByClient(Integer id);
     //
     void delete(Integer id);
 

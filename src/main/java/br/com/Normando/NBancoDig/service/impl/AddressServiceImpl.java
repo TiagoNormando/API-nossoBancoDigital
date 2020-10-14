@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +36,11 @@ public class AddressServiceImpl implements AddressService {
         return value.isPresent() ? value.get() : null;
     }
     //
+    @Override
+    public List<AddressModel> findByClient(Integer id){
+         List<AddressModel> value = addressRepository.findByClient(id);
+        return value;
+    }
     @Override
     public AddressModel save(AddressModel addressMd){
         addressMd.setClient(clientService.findById(addressMd.getClient().getId()));

@@ -40,4 +40,5 @@ public class ClientModel {
     //
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     List<AddressModel> AddressList;
+    //
 }
