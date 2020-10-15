@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface AddressRepository extends JpaRepository<AddressModel, Integer> {
-    @Query( value = "select a from AddressModel a where a.idClient = :clientId", nativeQuery = true)
+    @Query( value = "select a from AddressModel a where a.client.id = :clientId")
     List<AddressModel> findByClient(@Param("clientId") Integer clientId);
 }

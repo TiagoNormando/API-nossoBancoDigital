@@ -1,6 +1,7 @@
 package br.com.Normando.NBancoDig.service.impl;
 
 
+import br.com.Normando.NBancoDig.exception.BussinesException;
 import br.com.Normando.NBancoDig.model.ProposedModel;
 import br.com.Normando.NBancoDig.repository.ProposedRepository;
 import br.com.Normando.NBancoDig.service.ProposedService;
@@ -23,19 +24,35 @@ public class ProposedServiceImpl implements ProposedService {
 
     @Override
     public ProposedModel findById(Integer id){
-        Optional<ProposedModel> value = proposedRepository.findById(id);
-        return value.isPresent() ? value.get() : null;
+        try {
+            Optional<ProposedModel> value = proposedRepository.findById(id);
+            return value.isPresent() ? value.get() : null;
+        } catch (Exception ex) {
+            throw new BussinesException("Erro no request: " + ex);
+
+        }
+
     }
     //
     @Override
     public ProposedModel save(ProposedModel ProposedMd){
-        return proposedRepository.save(ProposedMd);
+        try {
+            return proposedRepository.save(ProposedMd);
+        } catch (Exception ex) {
+            throw new BussinesException("Erro no request: " + ex);
+
+        }
+
     }
     //
     public ProposedModel save(Integer id, ProposedModel ProposedMd) {
-        ProposedMd.setId(id);
-        //
-        return proposedRepository.save(ProposedMd);
+        try {
+            ProposedMd.setId(id);
+            //
+            return proposedRepository.save(ProposedMd);
+        } catch (Exception ex) {
+            throw new BussinesException("Erro no request: " + ex);
+        }
     }
 
     public void delete(Integer id){

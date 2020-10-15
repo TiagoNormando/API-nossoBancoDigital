@@ -2,6 +2,7 @@ package br.com.Normando.NBancoDig.service.impl;
 
 
 
+import br.com.Normando.NBancoDig.exception.BussinesException;
 import br.com.Normando.NBancoDig.model.AddressModel;
 import br.com.Normando.NBancoDig.model.ClientModel;
 import br.com.Normando.NBancoDig.repository.AddressRepository;
@@ -32,27 +33,50 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressModel findById(Integer id){
-        Optional<AddressModel> value = addressRepository.findById(id);
-        return value.isPresent() ? value.get() : null;
+        try {
+            Optional<AddressModel> value = addressRepository.findById(id);
+            return value.isPresent() ? value.get() : null;
+        } catch (Exception ex) {
+            throw new BussinesException("Erro no request: " + ex);
+
+        }
+
     }
     //
     @Override
     public List<AddressModel> findByClient(Integer id){
-         List<AddressModel> value = addressRepository.findByClient(id);
-        return value;
+        try {
+            List<AddressModel> value = addressRepository.findByClient(id);
+            return value;
+        } catch (Exception ex) {
+            throw new BussinesException("Erro no request");
+
+        }
+
     }
     @Override
     public AddressModel save(AddressModel addressMd){
-        addressMd.setClient(clientService.findById(addressMd.getClient().getId()));
+        try {
+            addressMd.setClient(clientService.findById(addressMd.getClient().getId()));
 
-        return addressRepository.save(addressMd);
+            return addressRepository.save(addressMd);
+
+        } catch (Exception ex) {
+            throw new BussinesException("Erro no request: " + ex);
+
+        }
     }
     //
     public AddressModel save(Integer id, AddressModel addressMd) {
-        addressMd.setId(id);
-        addressMd.setClient(clientService.findById(addressMd.getClient().getId()));
-        //
-        return addressRepository.save(addressMd);
+        try {
+            addressMd.setId(id);
+            addressMd.setClient(clientService.findById(addressMd.getClient().getId()));
+            //
+            return addressRepository.save(addressMd);
+        } catch (Exception ex) {
+            throw new BussinesException("Erro no request: " + ex);
+
+        }
     }
 
 
